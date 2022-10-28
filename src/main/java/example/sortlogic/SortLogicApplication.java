@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class SortLogicApplication {
 
+    private static final CommonModule cm = CommonModule.getInstance();
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         SortLogicApplication sa = new SortLogicApplication();
@@ -87,7 +89,7 @@ public class SortLogicApplication {
 
         // 가장 적합한 값을 해당 위치로 찾아오는 정렬
 
-        int[] array = randomNumber();
+        int[] array = cm.randomNumber();
 
         for (int i = 0; i < array.length; i++) {
             int index = i;
@@ -96,31 +98,28 @@ public class SortLogicApplication {
                     index = j;
                 }
             }
-            swap(array, i, index);
-            printArray(array);
+            cm.swap(array, i, index);
+            cm.printArray(array);
         }
-        endSort(array);
+        cm.endSort(array);
         return 0;
     }
 
     public int insertionSort() {
 
         System.out.println(" 삽입 정렬");
-        // 순차적 접근으로 값을 변경?
-        // 로직이 맞는지부터 판단이 잘 안됨.
-        // 맞는거 같음
 
-        int[] arr = randomNumber();
+        int[] arr = cm.randomNumber();
 
         for (int i = 1; i < arr.length; i++) {
             for (int j = 0; j < i; j++) {
                 if (arr[j] > arr[i]) {
-                    swap(arr, i, j);
+                    cm.swap(arr, i, j);
                 }
             }
-            printArray(arr);
+            cm.printArray(arr);
         }
-        endSort(arr);
+        cm.endSort(arr);
         return 0;
     }
 
@@ -128,25 +127,26 @@ public class SortLogicApplication {
 
         System.out.println(" 버블 정렬 ");
 
-        int[] arr = randomNumber();
+        int[] arr = cm.randomNumber();
         for (int i = arr.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (arr[j] > arr[j + 1]) {
-                    swap(arr, j, j + 1);
+                    cm.swap(arr, j, j + 1);
                 }
             }
-            printArray(arr);
+            cm.printArray(arr);
         }
-        endSort(arr);
+        cm.endSort(arr);
         return 0;
     }
 
     public int quickChoice(int a) {
         try {
             Scanner sc = new Scanner(System.in);
+            QuickSortClass qs = new QuickSortClass(cm);
             int b = 0;
             while (b != 4) {
-                int[] arr = randomNumber();
+                int[] arr = cm.randomNumber();
 
                 System.out.println(" 퀵 정렬 ");
                 System.out.println(" 1. 첫번째 값을 피벗");
@@ -159,13 +159,13 @@ public class SortLogicApplication {
 
                 switch (b) {
                     case 1:
-                        b = firstPivot(arr);
+                        b = qs.firstPivot(arr);
                         break;
                     case 2:
-                        b = centerPivot(arr);
+                        b = qs.centerPivot(arr);
                         break;
                     case 3:
-                        b = lastPivot(arr);
+                        b = qs.lastPivot(arr);
                         break;
                 }
             }
@@ -176,112 +176,6 @@ public class SortLogicApplication {
             quickChoice(a);
         }
         return 0;
-    }
-
-    private void quickExtracted(int[] arr) {
-        System.out.println();
-        System.out.println("정렬 후");
-        printArray(arr);
-        System.out.println("");
-    }
-
-    private int firstPivot(int[] arr) {
-
-        int high = arr.length - 1;
-        int low = 0;
-        quickSortFirst(arr, high, low);
-        quickExtracted(arr);
-        return 0;
-    }
-
-    public void quickSortFirst(int[] array, int high, int low) {
-
-        if (low >= high) return;
-
-        int pivot = partitionFirst(array, high, low);
-
-        quickSortFirst(array, pivot - 1, low);
-        quickSortFirst(array, high, pivot + 1);
-    }
-
-    private int partitionFirst(int[] arr, int high, int low) {
-        int right = high;
-        int left = low;
-
-        int pivot = arr[low];
-
-        while (left < right) {
-
-            while (arr[right] > pivot && left < right) {
-                right--;
-            }
-
-            while (arr[left] <= pivot && left < right) {
-                left++;
-            }
-
-            swap(arr, right, left);
-        }
-
-        swap(arr, low, left);
-
-        return left;
-    }
-
-    private int centerPivot(int[] arr) {
-        int high = arr.length - 1;
-        int low = 0;
-        quickSortCenter(arr, high, low);
-        quickExtracted(arr);
-        return 0;
-    }
-
-    private void quickSortCenter(int[] arr, int high, int low) {
-
-    }
-
-    private int lastPivot(int[] arr) {
-        int high = arr.length - 1;
-        int low = 0;
-        quicksortLast(arr, high, low);
-        quickExtracted(arr);
-        return 0;
-    }
-
-    private void quicksortLast(int[] arr, int high, int low) {
-
-        if (low >= high) return;
-
-        int pivot = partitionLast(arr, high, low);
-
-        quicksortLast(arr, pivot - 1, low);
-        quicksortLast(arr, high, pivot + 1);
-
-    }
-
-    private int partitionLast(int[] arr, int high, int low) {
-
-        int right = high;
-        int left = low;
-
-        int pivot = arr[high];
-
-        while (left < right) {
-
-            while (arr[right] >= pivot && left < right) {
-                right--;
-            }
-
-            while (arr[left] < pivot && left < right) {
-                left++;
-            }
-
-            swap(arr, right, left);
-        }
-
-        swap(arr, right, high);
-
-        return right;
     }
 
     public int mergeSort() {
@@ -295,33 +189,6 @@ public class SortLogicApplication {
     public int treeSort() {
 
         return 0;
-    }
-
-    private int[] randomNumber() {
-        int[] numberArray = new int[8];
-        System.out.println("정렬 전");
-        for (int i = 0; i < numberArray.length; i++) {
-            numberArray[i] = 1 + (int) Math.round(Math.random() * 100);
-        }
-        System.out.println(Arrays.toString(numberArray));
-        System.out.println();
-        return numberArray;
-    }
-
-    private void printArray(int[] arr) {
-        System.out.println(Arrays.toString(arr));
-    }
-
-    private void endSort(int[] arr) {
-        System.out.println();
-        System.out.println("정렬 후");
-        printArray(arr);
-    }
-
-    private void swap(int[] arr, int high, int low) {
-        int temp = arr[high];
-        arr[high] = arr[low];
-        arr[low] = temp;
     }
 
 }
