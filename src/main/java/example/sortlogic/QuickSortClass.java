@@ -36,7 +36,7 @@ public class QuickSortClass {
 
         return 0;
     }
-    
+
     public void quickSortFirst(int[] array, int high, int low) {
 
         if (low >= high) return;

@@ -70,7 +70,7 @@ public class SortLogicApplication {
                 bubbleSort();
                 break;
             case 4:
-                quickChoice(a, cm);
+                quickChoice(cm);
                 break;
             case 5:
                 mergeSort();
@@ -140,7 +140,7 @@ public class SortLogicApplication {
         return 0;
     }
 
-    public int quickChoice(int a, CommonModule cm) {
+    public int quickChoice(CommonModule cm) {
         try {
             Scanner sc = new Scanner(System.in);
             QuickSortClass qs = new QuickSortClass(cm);
@@ -173,7 +173,7 @@ public class SortLogicApplication {
         } catch (InputMismatchException e) {
             System.out.println("예외 발생");
             System.out.println();
-            quickChoice(a, cm);
+            quickChoice(cm);
         }
         return 0;
     }
