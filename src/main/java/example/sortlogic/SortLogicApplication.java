@@ -73,7 +73,8 @@ public class SortLogicApplication {
                 quickChoice(cm);
                 break;
             case 5:
-                mergeSort();
+                int[] arr = cm.randomNumber();
+                mergeSort(arr);
                 break;
             case 6:
                 heapSort();
@@ -159,13 +160,13 @@ public class SortLogicApplication {
 
                 switch (b) {
                     case 1:
-                        b = qs.pivotChoice(arr,"first");
+                        b = qs.pivotChoice(arr, "first");
                         break;
                     case 2:
-                        b = qs.pivotChoice(arr,"center");
+                        b = qs.pivotChoice(arr, "center");
                         break;
                     case 3:
-                        b = qs.pivotChoice(arr,"last");
+                        b = qs.pivotChoice(arr, "last");
                         break;
                 }
             }
@@ -178,8 +179,57 @@ public class SortLogicApplication {
         return 0;
     }
 
-    public int mergeSort() {
+    public int mergeSort(int[] arr) {
+
+        System.out.println("정렬 전");
+        cm.printArray(arr);
+        System.out.println("정렬 후");
+        cm.printArray(mergeProcess(arr));
         return 0;
+    }
+
+    public int[] mergeProcess(int[] arr) {
+        if (arr.length > 1) {
+            int[] littleArr1 = new int[arr.length / 2];
+            int[] littleArr2 = new int[arr.length / 2];
+
+            for (int i = 0; i < littleArr1.length; i++) {
+                littleArr1[i] = arr[i];
+            }
+            for (int j = littleArr2.length; j < arr.length; j++) {
+                littleArr2[j - littleArr2.length] = arr[j];
+            }
+            int[] temp = mergeProcess(littleArr1);
+            int[] temp2 = mergeProcess(littleArr2);
+            int[] mergeArray = new int[temp.length + temp2.length];
+
+            int a = 0, b = 0, c = 0;
+            while (c < mergeArray.length) {
+
+                try {
+                    if (temp[a] < temp2[b]) {
+                        mergeArray[c] = temp[a];
+                        a++;
+                    } else {
+                        mergeArray[c] = temp2[b];
+                        b++;
+                    }
+                    c++;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    if (a > b) {
+                        mergeArray[c] = temp2[b];
+                        b++;
+                    } else {
+                        mergeArray[c] = temp[a];
+                        a++;
+                    }
+                    c++;
+                }
+            }
+
+            return mergeArray;
+        }
+        return arr;
     }
 
     public int heapSort() {
