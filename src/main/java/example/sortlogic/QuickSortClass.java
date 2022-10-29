@@ -92,7 +92,7 @@ public class QuickSortClass {
                 right--;
             }
             cm.swap(arr, right, left);
-            if(right == left){
+            if(right == left || right < 0 || left > high){
                 break;
             }
         }
