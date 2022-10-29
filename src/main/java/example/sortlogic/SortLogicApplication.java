@@ -70,7 +70,7 @@ public class SortLogicApplication {
                 bubbleSort();
                 break;
             case 4:
-                quickChoice(a);
+                quickChoice(a, cm);
                 break;
             case 5:
                 mergeSort();
@@ -140,13 +140,12 @@ public class SortLogicApplication {
         return 0;
     }
 
-    public int quickChoice(int a) {
+    public int quickChoice(int a, CommonModule cm) {
         try {
             Scanner sc = new Scanner(System.in);
             QuickSortClass qs = new QuickSortClass(cm);
             int b = 0;
             while (b != 4) {
-                int[] arr = cm.randomNumber();
 
                 System.out.println(" 퀵 정렬 ");
                 System.out.println(" 1. 첫번째 값을 피벗");
@@ -154,18 +153,19 @@ public class SortLogicApplication {
                 System.out.println(" 3. 마지막 값을 피벗");
                 System.out.println(" 4. 이전으로");
                 System.out.println();
+                int[] arr = cm.randomNumber();
                 System.out.print("메뉴 선택 : ");
                 b = sc.nextInt();
 
                 switch (b) {
                     case 1:
-                        b = qs.firstPivot(arr);
+                        b = qs.pivotChoice(arr,"first");
                         break;
                     case 2:
-                        b = qs.centerPivot(arr);
+                        b = qs.pivotChoice(arr,"center");
                         break;
                     case 3:
-                        b = qs.lastPivot(arr);
+                        b = qs.pivotChoice(arr,"last");
                         break;
                 }
             }
@@ -173,7 +173,7 @@ public class SortLogicApplication {
         } catch (InputMismatchException e) {
             System.out.println("예외 발생");
             System.out.println();
-            quickChoice(a);
+            quickChoice(a, cm);
         }
         return 0;
     }

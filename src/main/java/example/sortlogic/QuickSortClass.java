@@ -17,15 +17,26 @@ public class QuickSortClass {
         System.out.println("");
     }
 
-    public int firstPivot(int[] arr) {
-
+    public int pivotChoice(int[] arr, String choice) {
         int high = arr.length - 1;
         int low = 0;
-        quickSortFirst(arr, high, low);
+
+        switch (choice) {
+            case "first":
+                quickSortFirst(arr, high, low);
+                break;
+            case "center":
+                quickSortCenter(arr, high, low);
+                break;
+            case "last":
+                quicksortLast(arr, high, low);
+                break;
+        }
         quickExtracted(arr);
+
         return 0;
     }
-
+    
     public void quickSortFirst(int[] array, int high, int low) {
 
         if (low >= high) return;
@@ -60,13 +71,6 @@ public class QuickSortClass {
         return left;
     }
 
-    public int centerPivot(int[] arr) {
-        int high = arr.length - 1;
-        int low = 0;
-        quickSortCenter(arr, high, low);
-        quickExtracted(arr);
-        return 0;
-    }
 
     public void quickSortCenter(int[] arr, int high, int low) {
 
@@ -84,28 +88,20 @@ public class QuickSortClass {
         int index = (high + low) / 2;
         int pivot = arr[index];
 
-        while (true){
-            while (arr[left] < pivot){
+        while (true) {
+            while (arr[left] < pivot) {
                 left++;
             }
-            while (arr[right] > pivot){
+            while (arr[right] > pivot) {
                 right--;
             }
             cm.swap(arr, right, left);
-            if(right == left || right < 0 || left > high){
+            if (right == left || right < 0 || left > high) {
                 break;
             }
         }
         return right;
 
-    }
-
-    public int lastPivot(int[] arr) {
-        int high = arr.length - 1;
-        int low = 0;
-        quicksortLast(arr, high, low);
-        quickExtracted(arr);
-        return 0;
     }
 
     public void quicksortLast(int[] arr, int high, int low) {
