@@ -15,7 +15,7 @@ public class CommonModule {
 
     public int[] randomNumber() {
 
-        int[] numberArray = new int[8];
+        int[] numberArray = new int[9];
         System.out.println("정렬 전");
         for (int i = 0; i < numberArray.length; i++) {
             numberArray[i] = 1 + (int) Math.round(Math.random() * 100);
