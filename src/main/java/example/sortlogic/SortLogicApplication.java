@@ -29,9 +29,6 @@ public class SortLogicApplication {
         }
     }
 
-    /**
-     * 화면 출력
-     */
     private void print() {
         System.out.println("정렬 번호 입력");
         System.out.println("");
@@ -52,11 +49,6 @@ public class SortLogicApplication {
         System.out.print("입력 : ");
     }
 
-    /**
-     * 메인 분기문
-     *
-     * @param a
-     */
     public void mainFrame(int a) {
 
         switch (a) {
@@ -182,7 +174,7 @@ public class SortLogicApplication {
     public int mergeSort(int[] arr) {
         MergeSortClass ms = new MergeSortClass();
         System.out.println("정렬 후");
-        cm.printArray(ms.mergeProcess(arr));
+        cm.printArray(ms.mergeDecomposition(arr));
         return 0;
     }
 
