@@ -48,18 +48,21 @@ public class SortLogicApplication {
 
         System.out.print("입력 : ");
     }
-
+    
     public void mainFrame(int a) {
-
+        long beforeTime = System.currentTimeMillis();
         switch (a) {
             case 1:
                 selectSort();
+                cm.time(beforeTime);
                 break;
             case 2:
                 insertionSort();
+                cm.time(beforeTime);
                 break;
             case 3:
                 bubbleSort();
+                cm.time(beforeTime);
                 break;
             case 4:
                 quickChoice(cm);
@@ -67,6 +70,7 @@ public class SortLogicApplication {
             case 5:
                 int[] arr = cm.randomNumber();
                 mergeSort(arr);
+                cm.time(beforeTime);
                 break;
             case 6:
                 heapSort();

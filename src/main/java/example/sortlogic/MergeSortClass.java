@@ -2,7 +2,7 @@ package example.sortlogic;
 
 public class MergeSortClass {
 
-    public int[] mergeProcess(int[] arr) {
+    public int[] mergeDecomposition(int[] arr) {
         // 만약 정렬자리가 홀수 일때는 작동이 안될거라 예상됨 (인덱스아웃) / 해결 완
         // 더 좋은 방법이 있을 것 같음
         if (arr.length > 1) {
@@ -23,19 +23,19 @@ public class MergeSortClass {
             for (int j = littleArr1.length; j < arr.length; j++) {
                 littleArr2[j - littleArr1.length] = arr[j];
             }
-            int[] temp = mergeProcess(littleArr1);
-            int[] temp2 = mergeProcess(littleArr2);
+
+            int[] temp = mergeDecomposition(littleArr1);
+            int[] temp2 = mergeDecomposition(littleArr2);
             int[] mergeArray = new int[temp.length + temp2.length];
 
-
-            mergeFunction(mergeArray, temp, temp2);
+            mergeProcess(mergeArray, temp, temp2);
 
             return mergeArray;
         }
         return arr;
     }
 
-    public void mergeFunction(int[] mergeArray, int[] temp, int[] temp2) {
+    public void mergeProcess(int[] mergeArray, int[] temp, int[] temp2) {
         int a = 0, b = 0, c = 0;
         while (c < mergeArray.length) {
             try {

@@ -18,7 +18,7 @@ public class CommonModule {
         int[] numberArray = new int[9];
         System.out.println("정렬 전");
         for (int i = 0; i < numberArray.length; i++) {
-            numberArray[i] = 1 + (int) Math.round(Math.random() * 100);
+            numberArray[i] = 1 + (int) Math.round(Math.random() * 6);
         }
         System.out.println(Arrays.toString(numberArray));
         System.out.println();
@@ -41,4 +41,8 @@ public class CommonModule {
         arr[low] = temp;
     }
 
+    public void time(long beforeTime){
+        long afterTime = System.currentTimeMillis();
+        System.out.println("소요시간 : " + (afterTime - beforeTime) + "ms" );
+    }
 }

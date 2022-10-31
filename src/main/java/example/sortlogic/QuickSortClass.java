@@ -20,6 +20,7 @@ public class QuickSortClass {
     public int pivotChoice(int[] arr, String choice) {
         int high = arr.length - 1;
         int low = 0;
+        long beforeTime = System.currentTimeMillis();
 
         switch (choice) {
             case "first":
@@ -33,7 +34,7 @@ public class QuickSortClass {
                 break;
         }
         quickExtracted(arr);
-
+        cm.time(beforeTime);
         return 0;
     }
 
@@ -89,17 +90,18 @@ public class QuickSortClass {
         int pivot = arr[index];
 
         while (true) {
-            while (arr[left] < pivot) {
+            if (right == left || right < 0 || left > high) {
+                break;
+            }
+            while (arr[left] <= pivot) {
                 left++;
             }
             while (arr[right] > pivot) {
                 right--;
             }
             cm.swap(arr, right, left);
-            if (right == left || right < 0 || left > high) {
-                break;
-            }
         }
+
         return right;
 
     }
